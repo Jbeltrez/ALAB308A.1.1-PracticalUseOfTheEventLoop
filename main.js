@@ -84,10 +84,29 @@ function arrayFlatTrampoline(arr, result = []) {
 
 // Part 3 
 
-const trampoline = (flattenThis, ...args) => {
-    let result = flattenThis(...args);
-    while (typeof result === "function") {
-      result = result();
+let textSingle = document.querySelector("#textingle");
+
+function isPrime(num) {
+  if (num < 2) return false;
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
     }
-    return result;
   }
+  return true;
+}
+
+function primeFunc(n, current = 1) {
+  if (current > n) {
+    // When finished, show an alert
+    alert("Calculation is finished");
+    return;
+  }
+
+  if (isPrime(current)) {
+    textSingle.innerHTML += current + " "; // Add the prime number to the HTML element
+  }
+
+  // Use setTimeout to defer the execution, allowing the browser to render
+  setTimeout(() => primeFunc(n, current + 1), 0);
+}
